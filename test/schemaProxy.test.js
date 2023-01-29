@@ -96,6 +96,14 @@ describe('Testing Schema Proxy', () => {
     assert.deepStrictEqual(proxied.properties.zip[titles], ['Example Proxy', undefined, 'An object']);
   });
 
+  it('Schema Proxy creates a JSON schema with title References using property name as default value', () => {
+    const proxied = loader()('proxy.schema.json', example);
+
+    assert.deepStrictEqual(proxied[titles], ['Example Proxy']);
+    assert.deepStrictEqual(proxied.properties.foo[titles], ['Example Proxy', undefined, 'foo']);
+    assert.deepStrictEqual(proxied.properties.bar[titles], ['Example Proxy', undefined, 'bar']);
+  });
+
   it('Schema proxy resolves JSON Pointers', () => {
     const myloader = loader();
     const proxied1 = myloader('proxy.schema.json', example);
